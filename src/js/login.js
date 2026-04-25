@@ -61,3 +61,5 @@ async function login() {
         loginBtn.textContent = 'Iniciar sesión';
     }
 }
+
+window.login = login;

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Archivo generado css tailwind -->
+    <link href="./output.css" rel="stylesheet">
+
+    <!-- Título y logo -->
+    <title>Encuesta inicial - Sereno</title>
+
+    <!-- Estilos para animaciones -->
+    <style>
+        .questions-group {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .questions-group.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .radio-group input[type="radio"] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <section class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a href="index.html" class="flex items-center mb-6 text-2xl font-semibold text-gray-900"><img class="size-16 rounded-xl mr-3" src="assets/logo_cuadrado.jpeg" alt="logo">Sereno</a>
+        <div class="w-full rounded-lg shadow md:mt-0 sm:max-w-7xl xl:p-0 bg-white"><div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            
+            <h2 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">Encuesta personal | Nivel de estrés</h2>
+            <p class="mb-6 text-sm font-medium text-gray-500 text-justify">(1) Nunca - (5) Siempre</p>
+            <form class="space-y-4 md:space-y-6" id="stressorsForm">
+                
+                <!-- Indicador de progreso -->
+                <div class="text-center mb-6 text-sm text-gray-500">
+                    Pregunta <span id="currentQuestion">1</span> de <span id="totalQuestions">12</span>
+                </div>
+
+                <!-- Contenedor de preguntas -->
+                <div id="questionsContainer" class="space-y-6">
+                    
+                    <!-- Grupo 1: Creencias sobre el rendimiento -->
+                    <div class="questions-group active" data-group="0">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">1. Creencias sobre el rendimiento</h3>
+                        
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">1. Me siento estresado porque no sé si mi rendimiento académico es adecuado.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p1" value="1" required> 1</label>
+                                <label><input type="radio" name="p1" value="2"> 2</label>
+                                <label><input type="radio" name="p1" value="3"> 3</label>
+                                <label><input type="radio" name="p1" value="4"> 4</label>
+                                <label><input type="radio" name="p1" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">2. Me inquieta pensar que no podré cumplir con las exigencias de mi carrera.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p2" value="1" required> 1</label>
+                                <label><input type="radio" name="p2" value="2"> 2</label>
+                                <label><input type="radio" name="p2" value="3"> 3</label>
+                                <label><input type="radio" name="p2" value="4"> 4</label>
+                                <label><input type="radio" name="p2" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">3. Me genera estrés no saber cómo lograr que mi esfuerzo académico sea reconocido.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p3" value="1" required> 1</label>
+                                <label><input type="radio" name="p3" value="2"> 2</label>
+                                <label><input type="radio" name="p3" value="3"> 3</label>
+                                <label><input type="radio" name="p3" value="4"> 4</label>
+                                <label><input type="radio" name="p3" value="5"> 5</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 2: Intervenciones en público -->
+                    <div class="questions-group" data-group="1">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">2. Intervenciones en público</h3>
+                        
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">4. Me pongo nervioso cuando tengo que hablar en voz alta en clase.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p4" value="1" required> 1</label>
+                                <label><input type="radio" name="p4" value="2"> 2</label>
+                                <label><input type="radio" name="p4" value="3"> 3</label>
+                                <label><input type="radio" name="p4" value="4"> 4</label>
+                                <label><input type="radio" name="p4" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">5. Me genera estrés exponer un tema frente a mis compañeros.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p5" value="1" required> 1</label>
+                                <label><input type="radio" name="p5" value="2"> 2</label>
+                                <label><input type="radio" name="p5" value="3"> 3</label>
+                                <label><input type="radio" name="p5" value="4"> 4</label>
+                                <label><input type="radio" name="p5" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">6. Me inquieta participar dando mi opinión en público durante clase.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p6" value="1" required> 1</label>
+                                <label><input type="radio" name="p6" value="2"> 2</label>
+                                <label><input type="radio" name="p6" value="3"> 3</label>
+                                <label><input type="radio" name="p6" value="4"> 4</label>
+                                <label><input type="radio" name="p6" value="5"> 5</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 3: Clima social -->
+                    <div class="questions-group" data-group="2">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">3. Clima social</h3>
+                        
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">7. Me estresa la falta de apoyo entre compañeros en clase.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p7" value="1" required> 1</label>
+                                <label><input type="radio" name="p7" value="2"> 2</label>
+                                <label><input type="radio" name="p7" value="3"> 3</label>
+                                <label><input type="radio" name="p7" value="4"> 4</label>
+                                <label><input type="radio" name="p7" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">8. Me genera inquietud la competitividad excesiva en el ambiente académico.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p8" value="1" required> 1</label>
+                                <label><input type="radio" name="p8" value="2"> 2</label>
+                                <label><input type="radio" name="p8" value="3"> 3</label>
+                                <label><input type="radio" name="p8" value="4"> 4</label>
+                                <label><input type="radio" name="p8" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">9. Me siento estresado cuando hay un mal ambiente o conflictos en clase.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p9" value="1" required> 1</label>
+                                <label><input type="radio" name="p9" value="2"> 2</label>
+                                <label><input type="radio" name="p9" value="3"> 3</label>
+                                <label><input type="radio" name="p9" value="4"> 4</label>
+                                <label><input type="radio" name="p9" value="5"> 5</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 4: Horas de sueño -->
+                    <div class="questions-group" data-group="3">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">4. Horas de sueño</h3>
+                        
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">10. Me estresa no dormir lo suficiente por cumplir con actividades académicas.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p10" value="1" required> 1</label>
+                                <label><input type="radio" name="p10" value="2"> 2</label>
+                                <label><input type="radio" name="p10" value="3"> 3</label>
+                                <label><input type="radio" name="p10" value="4"> 4</label>
+                                <label><input type="radio" name="p10" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">11. Me inquieta tener que sacrificar horas de sueño para estudiar o hacer tareas.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p11" value="1" required> 1</label>
+                                <label><input type="radio" name="p11" value="2"> 2</label>
+                                <label><input type="radio" name="p11" value="3"> 3</label>
+                                <label><input type="radio" name="p11" value="4"> 4</label>
+                                <label><input type="radio" name="p11" value="5"> 5</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-gray-500 mb-3">12. Me siento cansado o agotado debido a la carga académica.</p>
+                            <div class="radio-group">
+                                <label><input type="radio" name="p12" value="1" required> 1</label>
+                                <label><input type="radio" name="p12" value="2"> 2</label>
+                                <label><input type="radio" name="p12" value="3"> 3</label>
+                                <label><input type="radio" name="p12" value="4"> 4</label>
+                                <label><input type="radio" name="p12" value="5"> 5</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Botones de navegación -->
+                <div class="flex gap-4 mt-8">
+                    <button type="button" id="prevBtn" class="flex-1 text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Anterior</button>
+                    <button type="button" id="nextBtn" class="flex-1 text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Siguiente</button>
+                </div>
+
+                <p class="text-sm font-light text-gray-500">
+                    Volver a <a href="index.html" class="font-medium text-gray-500 hover:underline">inicio</a>
+                </p>
+            </form>
+        </div>
+
+    </div></section>
+</body>
+
+<!-- Scripts -->
+<script src="js/onboarding_2.js"></script>
+
+</html>

@@ -1,4 +1,4 @@
-import { getUserNameFromToken, getJwtPayload } from "../main";
+import { getUserNameFromToken, getJwtPayload } from "../main.js";
 
 const loginBtn = document.getElementById('loginBtn');
 

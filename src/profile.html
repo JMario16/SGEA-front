@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Archivo generado css tailwind -->
+    <link href="./output.css" rel="stylesheet">
+
+    <!-- Título y logo -->
+    <title>Mi Perfil - Sereno</title>
+</head>
+
+<body class="bg-gray-50">
+    <header class="fixed w-full z-20 top-0 inset-s-0">
+        <nav class="bg-white">
+            <div class="flex flex-wrap justify-between items-center mx-auto max-w-7xl p-4">
+                <a href="dashboard.html" class="flex items-center space-x-3">
+                    <img src="assets/logo_cuadrado.jpeg" class="h-7 rounded-xs" alt="Sereno Logo"/>
+                    <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Sereno</span>
+                </a>
+                <div class="flex items-center space-x-6">
+                    <a onclick="cerrar_sesion()" class="text-sm font-medium text-fg-brand hover:underline cursor-pointer">Cerrar sesión</a>
+                </div>
+            </div>
+        </nav>
+        <nav class="bg-gray-50 border-y border-gray-300">
+            <div class="max-w-7xl px-4 py-3 mx-auto">
+                <div class="flex items-center">
+                    <ul class="flex flex-row font-medium mt-0 space-x-8 text-sm">
+                        <li>
+                            <a href="dashboard.html" class="text-heading hover:underline" aria-current="page">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="profile.html" class="text-heading hover:underline">Perfil</a>
+                        </li>
+                        <li>
+                            <a href="subjects.html" class="text-heading hover:underline">Materias</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="bg-white antialiased md:py-8 mt-35 shadow">
+            <div class="mx-auto max-w-5xl px-4 2xl:px-0">
+
+                <h2 class="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:mb-6">Mi Perfil</h2>
+                <div class="border-t border-gray-200 py-4"></div>
+                <div class="py-4 md:py-8">
+                <div class="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16">
+                    <div class="space-y-4">
+                    <div class="flex space-x-4">
+                        <img class="h-16 w-16 rounded-lg" src="assets/user_avatar.png" alt="User avatar" />
+                        <div><h2 id="nombreUsuario" class="flex md:mt-4 items-center text-xl font-bold leading-none text-gray-900 sm:text-2xl"></h2></div>
+                    </div>
+                    <dl class="">
+                        <dt class="font-semibold text-gray-900">Correo electrónico</dt>
+                        <dd class="text-gray-500" id="correoUsuario">ejemplo@email.com</dd>
+                    </dl>
+                    <dl>
+                        <dt class="font-semibold text-gray-900">Institución</dt>
+                        <dd class="flex items-center gap-1 text-gray-500">Institución académica</dd>
+                    </dl>
+                    <dl>
+                        <dt class="font-semibold text-gray-900">Carrera</dt>
+                        <dd class="flex items-center gap-1 text-gray-500">Ingeniería/Licenciatura</dd>
+                    </dl>
+                    </div>
+                    <div class="space-y-4">
+                    <dl>
+                        <dt class="font-semibold text-gray-900">Promedio general</dt>
+                        <dd class="text-gray-500">10</dd>
+                    </dl>
+                    <dl>
+                        <dt class="font-semibold text-gray-900">La sesión expira en: </dt>
+                        <dd class="flex items-center gap-1 text-gray-500">3600 s</dd>
+                    </dl>
+                    </div>
+                </div>
+                <button type="button" onclick="mostrarPerfil()" class="inline-flex w-full items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 sm:w-auto">
+                    <svg class="-ms-0.5 me-1.5 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"></path></svg>
+                    Editar datos de perfil
+                </button>
+                </div>
+                <div class="rounded-lg border border-gray-200 bg-gray-50 p-4 md:p-8">
+                    <h3 class="mb-4 text-xl font-semibold text-gray-900">Nivel de estrés: Medio</h3>
+                    <div class="flex flex-wrap items-center gap-y-4 border-b border-gray-200 pb-4 md:pb-5"></div>
+                    <p class="mt-2 font-light text-gray-500">Duerme bien! Descansar lo suficiente durante la noche puede ayudarte a pensar con más claridad y a tener más energía.</p>
+                </div>
+        </section>
+
+        <!-- Div para editar perfil (OCULTO) -->
+        <div id="divEditarPerfil" tabindex="-1" aria-hidden="true" class="hidden bg-gray-600/40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+            <div class="relative p-4 w-full max-w-2xl h-fit md:h-auto">
+
+                <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
+
+                    <div class="flex justify-between items-center pb-4 rounded-t border-b sm:mb-15">
+                        <h3 class="text-lg font-semibold text-gray-900">Editar perfil</h3>
+                        <button type="button" onclick="ocultarPerfil()" class="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-200 hover:text-gray-900">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+
+                    <form>
+                        <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                            <div class="w-full">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de usuario</label>
+                                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Usuario" required="">
+                            </div>
+                            <div class="w-full">
+                                <label for="institucion" class="block mb-2 text-sm font-medium text-gray-900">Intitución</label>
+                                <input type="text" name="institucion" id="institucion" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Institución" required="">
+                            </div>
+                            <div class="w-full">
+                                <label for="carrera" class="block mb-2 text-sm font-medium text-gray-900">Carrera</label>
+                                <input type="text" name="carrera" id="carrera" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Carrera" required="">
+                            </div>
+                            <div class="w-full">
+                                <label for="semestre" class="block mb-2 text-sm font-medium text-gray-900">Semestre</label>
+                                <input type="number" name="semestre" id="semestre" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Semestre" required="">
+                            </div>
+                            <div class="w-full">
+                                <label for="promedio" class="block mb-2 text-sm font-medium text-gray-900">Promedio (opcional)</label>
+                                <input type="number" step="0.01" name="promedio" id="promedio" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Promedio general">
+                            </div>
+                            <div class="w-full">
+                                <label for="avatar" class="block mb-2 text-sm font-medium text-gray-900">Avatar (opcional)</label>
+                                <input type="file" accept="image/*" name="avatar" id="avatar" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5">
+                            </div>
+                        </div>
+                        <button type="submit" onclick="save_materia()" class="p-1.5 ml-auto inline-flex items-center text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 font-medium rounded-lg text-sm">
+                            <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                            Actualizar perfil
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="p-4 mt-10 bg-white border-t border-gray-300 md:p-8 lg:p-10"><div class="mx-auto max-w-7xl text-center">
+        <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900">
+            <img src="assets/logo_cuadrado.jpeg" class="h-7 rounded-xs" alt="Sereno Logo"/>
+            <span class="self-center text-xl text-heading font-semibold whitespace-nowrap ml-3">Sereno</span>
+        </a>
+        <p class="my-6 text-gray-500">El mejor Task Manager de toda la UPIIZ.</p>
+        <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900">
+            <li>
+                <a href="subjects.html" class="mr-4 hover:underline md:mr-6 ">Materias</a>
+            </li>
+            <li>
+                <a href="#equipos" class="mr-4 hover:underline md:mr-6">Equipos</a>
+            </li>
+            <li>
+                <a href="#actividades" class="mr-4 hover:underline md:mr-6 ">Actividades</a>
+            </li>
+            <li>
+                <a href="#calendario" class="mr-4 hover:underline md:mr-6">Calendario</a>
+            </li>
+            <li>
+                <a href="#informe_completo" class="mr-4 hover:underline md:mr-6">Informe de estrés</a>
+            </li>
+            <li>
+                <a onclick="cerrar_sesion()" class="mr-4 hover:underline md:mr-6 cursor-pointer">Cerrar sesión</a>
+            </li>
+        </ul>
+        <span class="text-sm text-gray-500 sm:text-center">© 2026 <a class="hover:underline">Sereno™</a>. All Rights Reserved.</span>
+    </div></footer>
+</body>
+
+<!-- Scripts -->
+<script src="js/profile.js"></script>
+
+</html>

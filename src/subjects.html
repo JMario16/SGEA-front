@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Archivo generado css tailwind -->
+    <link href="./output.css" rel="stylesheet">
+
+    <!-- Título y logo -->
+    <title>Materias - Sereno</title>
+</head>
+
+<body class="bg-gray-50">
+    <header class="fixed w-full z-20 top-0 inset-s-0">
+        <nav class="bg-white">
+            <div class="flex flex-wrap justify-between items-center mx-auto max-w-7xl p-4">
+                <a href="dashboard.html" class="flex items-center space-x-3">
+                    <img src="assets/logo_cuadrado.jpeg" class="h-7 rounded-xs" alt="Sereno Logo"/>
+                    <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Sereno</span>
+                </a>
+                <div class="flex items-center space-x-6">
+                    <a onclick="cerrar_sesion()" class="text-sm font-medium text-fg-brand hover:underline cursor-pointer">Cerrar sesión</a>
+                </div>
+            </div>
+        </nav>
+        <nav class="bg-gray-50 border-y border-gray-300">
+            <div class="max-w-7xl px-4 py-3 mx-auto">
+                <div class="flex items-center">
+                    <ul class="flex flex-row font-medium mt-0 space-x-8 text-sm">
+                        <li>
+                            <a href="dashboard.html" class="text-heading hover:underline" aria-current="page">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="profile.html" class="text-heading hover:underline">Perfil</a>
+                        </li>
+                        <li>
+                            <a href="subjects.html" class="text-heading hover:underline">Materias</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MATERIAS -->
+    <main class="flex flex-col w-full z-20 top-0 inset-s-0 items-center justify-center">
+        <section class="w-auto rounded-lg shadow mt-36 xl:p-0 bg-white" id="Materias"><div class="py-8 px-10 max-w-7xl lg:py-16 lg:px-10">
+            <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+                <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900">Mis materias</h2>
+                <p class="font-light text-gray-500 sm:text-xl">Aqui puedes ver todas tus materias.</p>
+            </div> 
+            <div class="grid gap-8 lg:grid-cols-2">
+
+                <!-- Materias insertadas con js (Matemáticas de ejemplo, al crear una se sobreescribe) -->
+                <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
+                    <div class="flex justify-between items-center mb-5 text-gray-500">
+                        <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded">Materia</span>
+                    </div>
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><a href="subjects_details.html">Matemáticas</a></h2>
+                    <p class="mb-5 font-light text-gray-500">No tienes actividades pendientes.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <img class="w-7 h-7 rounded-full" src="assets/user_avatar.png" alt="User Avatar"/>
+                            <span class="font-medium" id="nombreUsuario"></span>
+                        </div>
+                        <a href="subjects_details.html" class="inline-flex items-center font-medium text-gray-800 hover:underline">
+                            Detalles<svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </a>
+                    </div>
+                </article>
+
+            </div></div>
+            <div class="flex justify-center mx-6 mb-6">
+                <button onclick="mostrarCrear()" class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                Crear materia
+                </button>
+            </div>
+        </section>
+
+        <!-- Div para crear materia (OCULTO) -->
+        <div id="divCrearMateria" tabindex="-1" aria-hidden="true" class="hidden bg-gray-600/40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+            <div class="relative p-4 w-full max-w-2xl h-fit md:h-auto">
+
+                <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
+
+                    <div class="flex justify-between items-center pb-4 rounded-t border-b sm:mb-15">
+                        <h3 class="text-lg font-semibold text-gray-900">Crear materia</h3>
+                        <button type="button" onclick="ocultarCrear()" class="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-200 hover:text-gray-900">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+
+                    <form>
+                        <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                            <div class="w-full">
+                                <label for="nombre_materia" class="block mb-2 text-sm font-medium text-gray-900">Nombre de la materia</label>
+                                <input type="text" name="nombre_materia" id="nombre_materia" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Nombre de la materia" required="">
+                            </div>
+                            <div class="w-full">
+                                <label for="calificacion_profesor" class="block mb-2 text-sm font-medium text-gray-900">Calificación profesor</label>
+                                <select id="calificacion_profesor" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg block w-full p-2.5">
+                                    <option selected="">Selecciona una opción</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="w-full">
+                                <label for="dificultad_examenes" class="block mb-2 text-sm font-medium text-gray-900">Dificultad de examenes</label>
+                                <select id="dificultad_examenes" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg block w-full p-2.5">
+                                    <option selected="">Selecciona una opción</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="w-full">
+                                <label for="autonomia_percibida" class="block mb-2 text-sm font-medium text-gray-900">Autonomía percibida</label>
+                                <select id="autonomia_percibida" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg block w-full p-2.5">
+                                    <option selected="">Selecciona una opción</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" onclick="save_materia()" class="p-1.5 ml-auto inline-flex items-center text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 font-medium rounded-lg text-sm">
+                            <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                            Crear materia
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="p-4 mt-10 bg-white border-t border-gray-300 md:p-8 lg:p-10"><div class="mx-auto max-w-7xl text-center">
+        <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900">
+            <img src="assets/logo_cuadrado.jpeg" class="h-7 rounded-xs" alt="Sereno Logo"/>
+            <span class="self-center text-xl text-heading font-semibold whitespace-nowrap ml-3">Sereno</span>
+        </a>
+        <p class="my-6 text-gray-500">El mejor Task Manager de toda la UPIIZ.</p>
+        <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900">
+            <li>
+                <a href="subjects.html" class="mr-4 hover:underline md:mr-6 ">Materias</a>
+            </li>
+            <li>
+                <a href="#equipos" class="mr-4 hover:underline md:mr-6">Equipos</a>
+            </li>
+            <li>
+                <a href="#actividades" class="mr-4 hover:underline md:mr-6 ">Actividades</a>
+            </li>
+            <li>
+                <a href="#calendario" class="mr-4 hover:underline md:mr-6">Calendario</a>
+            </li>
+            <li>
+                <a href="#informe_completo" class="mr-4 hover:underline md:mr-6">Informe de estrés</a>
+            </li>
+            <li>
+                <a onclick="cerrar_sesion()" class="mr-4 hover:underline md:mr-6 cursor-pointer">Cerrar sesión</a>
+            </li>
+        </ul>
+        <span class="text-sm text-gray-500 sm:text-center">© 2026 <a class="hover:underline">Sereno™</a>. All Rights Reserved.</span>
+    </div></footer>
+</body>
+
+<!-- Scripts -->
+<script src="js/subjects.js"></script>
+
+</html>

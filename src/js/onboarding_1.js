@@ -27,7 +27,7 @@ async function save_academic() {
                 institucion: institucion,
                 carrera: carrera,
                 semestre: semestre,
-                promedio: promedio
+                promedio_general: promedio
             })
         });
 

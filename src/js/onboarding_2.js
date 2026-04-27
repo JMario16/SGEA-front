@@ -32,9 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateButtonStates() {
-        prevBtn.disabled = false;
-        prevBtn.style.opacity = '1';
-        prevBtn.style.cursor = 'pointer';
+        if (currentGroup > 0) {
+            prevBtn.disabled = false;
+            prevBtn.style.opacity = '1';
+            prevBtn.style.cursor = 'pointer';
+        } else {
+            prevBtn.disabled = true;
+            prevBtn.style.opacity = '0.6';
+            prevBtn.style.cursor = 'not-allowed';
+        }
 
         if (currentGroup === totalGroups - 1) {
             nextBtn.textContent = 'Enviar';
@@ -68,12 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentGroup > 0) {
             showGroup(currentGroup - 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            window.location.href = "onboarding_1.html";
         }
     });
 
-    nextBtn.addEventListener('click', function(e) {
+    nextBtn.addEventListener('click', async function(e) {
         e.preventDefault();
 
         if (!isGroupAnswered()) {
@@ -97,24 +101,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     function avgForQuestionRange(startIndex) {
                         const values = [];
                         for (let i = startIndex; i < startIndex + 3; i++) {
-                            const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                            values.push(selected ? Number(selected.value) : 0);
+                            const selected = document.querySelector(`input[name="p${i}"]:checked`);
+                            values.push(selected ? parseInt(selected.value) : 0);
                         }
                         const sum = values.reduce((a, b) => a + b, 0);
                         return values.length ? sum / values.length : 0;
                     }
 
-                    const factor1 = avgForQuestionRange(1); // preguntas 1-3 -> id 3
-                    const factor2 = avgForQuestionRange(4); // preguntas 4-6 -> id 4
-                    const factor3 = avgForQuestionRange(7); // preguntas 7-9 -> id 5
-                    const factor4 = avgForQuestionRange(10); // preguntas 10-12 -> id 2
+                    const factor1 = Math.round(avgForQuestionRange(1)); // preguntas 1-3 -> id 3
+                    const factor2 = Math.round(avgForQuestionRange(4)); // preguntas 4-6 -> id 4
+                    const factor3 = Math.round(avgForQuestionRange(7)); // preguntas 7-9 -> id 5
+                    const factor4 = Math.round(avgForQuestionRange(10)); // preguntas 10-12 -> id 2
 
+                    // Los que aún no calculamos los dejamos en medio
                     const payload = {
                         factores: [
+                            { factor_id: 1, peso: 3 },
+                            { factor_id: 2, peso: factor4 },
                             { factor_id: 3, peso: factor1 },
                             { factor_id: 4, peso: factor2 },
                             { factor_id: 5, peso: factor3 },
-                            { factor_id: 2, peso: factor4 }
+                            { factor_id: 6, peso: 3 },
+                            { factor_id: 7, peso: 3 },
+                            { factor_id: 8, peso: 3 }
                         ]
                     };
 

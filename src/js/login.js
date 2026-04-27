@@ -36,7 +36,8 @@ async function login() {
                 alert('Abriendo sesión...');
                 sessionStorage.setItem('access_token', data.access_token);
                 sessionStorage.setItem('refresh_token', data.refresh_token);
-                sessionStorage.setItem('user_name', getUserNameFromToken(data.access_token))
+                const user = getUserNameFromToken(data.access_token);
+                sessionStorage.setItem('user_name', user.display_name);
                 
                 setTimeout(() => {
                     window.location.href = 'onboarding_1.html';
@@ -84,7 +85,7 @@ function getUserNameFromToken(token) {
       display_name: payload.user_metadata?.display_name || null,
     };
   } catch (error) {
-    console.error("Error al extraer datos del usuario", error);
+    console.error("Error al extraer user name", error);
     return null;
   }
 }

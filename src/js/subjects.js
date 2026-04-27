@@ -1,6 +1,57 @@
 const spanNombre = document.getElementById('nombreUsuario');
 spanNombre.textContent = sessionStorage.getItem('user_name');
 
+const crearMateriaBtn = document.querySelector('button[onclick="save_materia()"]');
+
+// Cargar materias al abrir la página
+async function cargarMaterias() {
+    try {
+        const response = await fetch('https://sgea.onrender.com/materias', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+            }
+        });
+
+        const materias = await response.json();
+
+        if (response.ok && Array.isArray(materias)) {
+            materias.forEach(materia => {
+                renderizarMateria(materia);
+            });
+        } else {
+            console.error('Error al obtener materias');
+        }
+    } catch (error) {
+        console.error('Error de conexión:', error);
+    }
+}
+
+function renderizarMateria(materia) {
+    const nuevoArticle = document.createElement('article');
+    nuevoArticle.id = `materia${materia.id}_article`;
+    nuevoArticle.className = 'p-6 bg-white rounded-lg border border-gray-200 shadow-md';
+    nuevoArticle.innerHTML = `
+        <div class="flex justify-between items-center mb-5 text-gray-500">
+            <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded">Materia</span>
+        </div>
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><a href="subjects_details.html">${materia.nombre}</a></h2>
+        <p class="mb-5 font-light text-gray-500">No tienes actividades pendientes.</p>
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img class="w-7 h-7 rounded-full" src="assets/user_avatar.png" alt="User Avatar"/>
+                <span class="font-medium">${sessionStorage.getItem('user_name')}</span>
+            </div>
+            <a href="subjects_details.html" class="inline-flex items-center font-medium text-gray-800 hover:underline">
+                Detalles<svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+        </div>
+    `;
+
+    document.getElementById('contenedorMaterias').appendChild(nuevoArticle);
+}
+
 function mostrarCrear() {
     const divCrear = document.getElementById('divCrearMateria');
     divCrear.style.display="flex";
@@ -11,6 +62,68 @@ function ocultarCrear() {
     divCrear.style.display="none";
 }
 
+async function save_materia() {
+    // Obtener valores del formulario
+    const nombreMateria = document.getElementById('nombre_materia').value;
+    const calificacionProfesor = document.getElementById('calificacion_profesor').value ? parseInt(document.getElementById('calificacion_profesor').value) : 3;
+    const dificultadExamenes = document.getElementById('dificultad_examenes').value ? parseInt(document.getElementById('dificultad_examenes').value) : 3;
+    const autonomiaPercibida = document.getElementById('autonomia_percibida').value ? parseInt(document.getElementById('autonomia_percibida').value) : 3;
+
+    // Validaciones
+    if (!nombreMateria) {
+        return;
+    }
+
+    // Cambiar estado del botón
+    crearMateriaBtn.disabled = true;
+    crearMateriaBtn.innerHTML = '<svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg> Creando...';
+
+    try {
+        const response = await fetch('https://sgea.onrender.com/materias', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+            },
+            body: JSON.stringify({
+                nombre: nombreMateria,
+                calificacion_profesor: calificacionProfesor,
+                dificultad: dificultadExamenes,
+                autonomia: autonomiaPercibida
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Renderizar la materia que devolvió la API
+            renderizarMateria(data);
+
+            // Limpiar el formulario
+            document.getElementById('nombre_materia').value = '';
+            document.getElementById('calificacion_profesor').value = 'Selecciona una opción';
+            document.getElementById('dificultad_examenes').value = 'Selecciona una opción';
+            document.getElementById('autonomia_percibida').value = 'Selecciona una opción';
+
+            // Ocultar el modal
+            ocultarCrear();
+        } else {
+            alert('Error al crear la materia: ' + (data.message || 'Error desconocido'));
+        }
+    } catch (error) {
+        alert('Error de conexión. Intenta nuevamente.');
+        console.error('Error:', error);
+    } finally {
+        // Restaurar estado del botón
+        crearMateriaBtn.disabled = false;
+        crearMateriaBtn.innerHTML = '<svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg> Crear materia';
+    }
+}
+
 function cerrar_sesion() {
     window.location.href = 'index.html';
+    sessionStorage.clear()
 }
+
+// Cargar materias cuando se carga la página
+cargarMaterias();

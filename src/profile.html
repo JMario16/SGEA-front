@@ -46,7 +46,7 @@
 
     <main>
         <section class="bg-white antialiased md:py-8 mt-35 shadow">
-            <div class="mx-auto max-w-5xl px-4 2xl:px-0">
+            <div class="mx-auto max-w-5xl px-4 2xl:px-0 pb-4">
 
                 <h2 class="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:mb-6">Mi Perfil</h2>
                 <div class="border-t border-gray-200 py-4"></div>
@@ -54,7 +54,7 @@
                 <div class="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16">
                     <div class="space-y-4">
                     <div class="flex space-x-4">
-                        <img class="h-16 w-16 rounded-lg" src="assets/user_avatar.png" alt="User avatar" />
+                        <img id="avatarUsuario" class="h-16 w-16 rounded-lg" src="assets/user_avatar.png" alt="User avatar" />
                         <div><h2 id="nombreUsuario" class="flex md:mt-4 items-center text-xl font-bold leading-none text-gray-900 sm:text-2xl"></h2></div>
                     </div>
                     <dl class="">
@@ -63,21 +63,25 @@
                     </dl>
                     <dl>
                         <dt class="font-semibold text-gray-900">Institución</dt>
-                        <dd class="flex items-center gap-1 text-gray-500">Institución académica</dd>
+                        <dd id="institucionUsuario" class="flex items-center gap-1 text-gray-500">Institución académica</dd>
                     </dl>
                     <dl>
                         <dt class="font-semibold text-gray-900">Carrera</dt>
-                        <dd class="flex items-center gap-1 text-gray-500">Ingeniería/Licenciatura</dd>
+                        <dd id="carreraUsuario" class="flex items-center gap-1 text-gray-500">Ingeniería/Licenciatura</dd>
                     </dl>
                     </div>
                     <div class="space-y-4">
                     <dl>
-                        <dt class="font-semibold text-gray-900">Promedio general</dt>
-                        <dd class="text-gray-500">10</dd>
+                        <dt class="font-semibold text-gray-900">Semestre</dt>
+                        <dd id="semestreUsuario" class="flex items-center gap-1 text-gray-500">1</dd>
                     </dl>
                     <dl>
-                        <dt class="font-semibold text-gray-900">La sesión expira en: </dt>
-                        <dd class="flex items-center gap-1 text-gray-500">3600 s</dd>
+                        <dt class="font-semibold text-gray-900">Promedio general</dt>
+                        <dd id="promedioUsuario" class="text-gray-500">10</dd>
+                    </dl>
+                    <dl>
+                        <dt class="font-semibold text-gray-900">Cuenta creada el: </dt>
+                        <dd id="fechaCreacionUsuario" class="flex items-center gap-1 text-gray-500">01/01/0001</dd>
                     </dl>
                     </div>
                 </div>
@@ -86,7 +90,7 @@
                     Editar datos de perfil
                 </button>
                 </div>
-                <div class="rounded-lg border border-gray-200 bg-gray-50 p-4 md:p-8">
+                <div class="rounded-lg border border-gray-200 bg-gray-50 px-4 py-4 mb-4">
                     <h3 class="mb-4 text-xl font-semibold text-gray-900">Nivel de estrés: Medio</h3>
                     <div class="flex flex-wrap items-center gap-y-4 border-b border-gray-200 pb-4 md:pb-5"></div>
                     <p class="mt-2 font-light text-gray-500">Duerme bien! Descansar lo suficiente durante la noche puede ayudarte a pensar con más claridad y a tener más energía.</p>
@@ -94,12 +98,12 @@
         </section>
 
         <!-- Div para editar perfil (OCULTO) -->
-        <div id="divEditarPerfil" tabindex="-1" aria-hidden="true" class="hidden bg-gray-600/40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        <div id="divEditarPerfil" tabindex="-1" aria-hidden="true" class="hidden bg-gray-600/40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-full">
             <div class="relative p-4 w-full max-w-2xl h-fit md:h-auto">
 
                 <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
 
-                    <div class="flex justify-between items-center pb-4 rounded-t border-b sm:mb-15">
+                    <div class="flex justify-between items-center pb-4 rounded-t border-b mb-15">
                         <h3 class="text-lg font-semibold text-gray-900">Editar perfil</h3>
                         <button type="button" onclick="ocultarPerfil()" class="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-200 hover:text-gray-900">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -109,7 +113,7 @@
                     <form>
                         <div class="grid gap-4 mb-4 sm:grid-cols-2">
                             <div class="w-full">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de usuario</label>
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Correo electrónico</label>
                                 <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Usuario" required="">
                             </div>
                             <div class="w-full">
@@ -133,7 +137,7 @@
                                 <input type="file" accept="image/*" name="avatar" id="avatar" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5">
                             </div>
                         </div>
-                        <button type="submit" onclick="save_materia()" class="p-1.5 ml-auto inline-flex items-center text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 font-medium rounded-lg text-sm">
+                        <button type="submit" onclick="update_perfil(event)" class="p-1.5 ml-auto inline-flex items-center text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-300 font-medium rounded-lg text-sm">
                             <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                             Actualizar perfil
                         </button>

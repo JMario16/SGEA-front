@@ -51,14 +51,14 @@
                 <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900">Mis materias</h2>
                 <p class="font-light text-gray-500 sm:text-xl">Aqui puedes ver todas tus materias.</p>
             </div> 
-            <div class="grid gap-8 lg:grid-cols-2">
+            <div class="grid gap-8 lg:grid-cols-2" id="contenedorMaterias">
 
-                <!-- Materias insertadas con js (Matemáticas de ejemplo, al crear una se sobreescribe) -->
-                <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
+                <!-- Materias insertadas con js -->
+                <article id="materia1_article" class="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
                     <div class="flex justify-between items-center mb-5 text-gray-500">
                         <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded">Materia</span>
                     </div>
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><a href="subjects_details.html">Matemáticas</a></h2>
+                    <h2 id="materia1" class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><a href="subjects_details.html">Materia ejemplo</a></h2>
                     <p class="mb-5 font-light text-gray-500">No tienes actividades pendientes.</p>
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-4">
@@ -80,12 +80,12 @@
         </section>
 
         <!-- Div para crear materia (OCULTO) -->
-        <div id="divCrearMateria" tabindex="-1" aria-hidden="true" class="hidden bg-gray-600/40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        <div id="divCrearMateria" tabindex="-1" aria-hidden="true" class="hidden bg-gray-600/40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-full">
             <div class="relative p-4 w-full max-w-2xl h-fit md:h-auto">
 
                 <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
 
-                    <div class="flex justify-between items-center pb-4 rounded-t border-b sm:mb-15">
+                    <div class="flex justify-between items-center pb-4 rounded-t border-b mb-15">
                         <h3 class="text-lg font-semibold text-gray-900">Crear materia</h3>
                         <button type="button" onclick="ocultarCrear()" class="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-200 hover:text-gray-900">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -101,7 +101,7 @@
                             <div class="w-full">
                                 <label for="calificacion_profesor" class="block mb-2 text-sm font-medium text-gray-900">Calificación profesor</label>
                                 <select id="calificacion_profesor" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg block w-full p-2.5">
-                                    <option selected="">Selecciona una opción</option>
+                                    <option value="" selected="">Selecciona una opción</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -112,7 +112,7 @@
                             <div class="w-full">
                                 <label for="dificultad_examenes" class="block mb-2 text-sm font-medium text-gray-900">Dificultad de examenes</label>
                                 <select id="dificultad_examenes" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg block w-full p-2.5">
-                                    <option selected="">Selecciona una opción</option>
+                                    <option value="" selected="">Selecciona una opción</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -123,7 +123,7 @@
                             <div class="w-full">
                                 <label for="autonomia_percibida" class="block mb-2 text-sm font-medium text-gray-900">Autonomía percibida</label>
                                 <select id="autonomia_percibida" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg block w-full p-2.5">
-                                    <option selected="">Selecciona una opción</option>
+                                    <option value="" selected="">Selecciona una opción</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
